@@ -1,5 +1,4 @@
-import type { LoginForm } from '@/pages/auth/components/LoginSchema'
-import type { RegisterForm } from '@/pages/auth/components/RegisterSchema'
+import type { LoginForm, RegisterForm } from '@/pages/auth/components'
 import { axios } from '@/plugins'
 import router from '@/router'
 import type { InitUser } from '@/types'

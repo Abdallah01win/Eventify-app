@@ -8,4 +8,4 @@ const loginSchema = z.object({
 
 export type LoginForm = z.infer<typeof loginSchema>
 
-export default toTypedSchema(loginSchema)
+export const logintypedSchema = toTypedSchema(loginSchema)

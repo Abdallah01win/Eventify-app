@@ -9,4 +9,4 @@ const registerSchema = z.object({
 
 export type RegisterForm = z.infer<typeof registerSchema>
 
-export default toTypedSchema(registerSchema)
+export const registertypedSchema = toTypedSchema(registerSchema)

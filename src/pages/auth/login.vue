@@ -8,7 +8,7 @@ import { Loader2 } from 'lucide-vue-next'
 import { useForm } from 'vee-validate'
 import { ref } from 'vue'
 
-import validationSchema from './components/LoginSchema'
+import { logintypedSchema as validationSchema } from './components'
 
 definePage({
   meta: {
