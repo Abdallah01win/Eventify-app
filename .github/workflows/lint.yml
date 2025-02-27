@@ -1,0 +1,21 @@
+name: ESLint
+
+on:
+  pull_request:
+    branches:
+      - dev
+
+jobs:
+  eslint:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor != 'dependabot[bot]' }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install ESLintd
+        run: npm install --save-dev eslint eslint-config-prettier eslint-plugin-vue globals typescript-eslint
+
+      - name: Run ESLint
+        run: npm run lint
