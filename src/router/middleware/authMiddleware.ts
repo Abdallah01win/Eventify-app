@@ -16,7 +16,8 @@ const authMiddleware = async (to: RouteLocation, _: unknown, next: NavigationGua
     return next({ name: '/auth/login' })
   }
 
-  if (to.name === '/auth/login' && isAuthenticated) return next({ name: '/' })
+  if (['/auth/login', '/auth/register'].includes(to.name) && isAuthenticated)
+    return next({ name: '/' })
 
   next()
 }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 definePage({
   meta: {
-    requiresAuth: false,
+    requiresAuth: false
   }
 })
 </script>

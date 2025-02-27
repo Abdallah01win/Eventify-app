@@ -12,7 +12,7 @@ import validationSchema from './components/loginSchema'
 
 definePage({
   meta: {
-    requiresAuth: false,
+    requiresAuth: false
   }
 })
 
@@ -49,7 +49,12 @@ const onSubmit = form.handleSubmit(async (values) => {
           <FormItem>
             <FormLabel>Email</FormLabel>
             <FormControl>
-              <Input placeholder="example@gmail.com" type="email" v-bind="componentField" />
+              <Input
+                placeholder="example@gmail.com"
+                type="email"
+                v-bind="componentField"
+                :disabled="loading"
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -64,7 +69,12 @@ const onSubmit = form.handleSubmit(async (values) => {
               </a>
             </div>
             <FormControl>
-              <Input type="password" v-bind="componentField" placeholder="Enter your password" />
+              <Input
+                type="password"
+                v-bind="componentField"
+                placeholder="Enter your password"
+                :disabled="loading"
+              />
             </FormControl>
             <FormMessage />
           </FormItem>

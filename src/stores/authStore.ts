@@ -1,5 +1,5 @@
-import RegisterSchema from '@/pages/auth/components/RegisterSchema'
-import loginSchema from '@/pages/auth/components/loginSchema'
+import type { LoginForm } from '@/pages/auth/components/loginSchema'
+import type { RegisterForm } from '@/pages/auth/components/registerSchema'
 import { axios } from '@/plugins'
 import router from '@/router'
 import type { InitUser } from '@/types'
@@ -11,7 +11,7 @@ export const useAuthStore = defineStore('auth', () => {
   const user = ref<InitUser | null>(null)
   const loading = ref(false)
 
-  const login = (form: typeof loginSchema) => {
+  const login = (form: LoginForm) => {
     return new Promise((_, reject) => {
       axios
         .post('auth/login', form)
@@ -23,7 +23,7 @@ export const useAuthStore = defineStore('auth', () => {
     })
   }
 
-  const register = (form: typeof RegisterSchema) => {
+  const register = (form: RegisterForm) => {
     return new Promise((_, reject) => {
       axios
         .post('auth/register', form)

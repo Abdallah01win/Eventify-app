@@ -8,7 +8,7 @@ import { Loader2 } from 'lucide-vue-next'
 import { useForm } from 'vee-validate'
 import { ref } from 'vue'
 
-import validationSchema from './components/loginSchema'
+import validationSchema from './components/registerSchema'
 
 definePage({
   meta: {
@@ -43,21 +43,31 @@ const onSubmit = form.handleSubmit(async (values) => {
         <p class="text-balance text-muted-foreground">Enter your info below to create an account</p>
       </div>
       <form class="grid gap-4" @submit.prevent="onSubmit">
-        <FormField v-slot="{ componentField }" name="email">
+        <FormField v-slot="{ componentField }" name="name">
           <FormItem>
-            <FormLabel>Email</FormLabel>
+            <FormLabel>Name</FormLabel>
             <FormControl>
-              <Input placeholder="example@gmail.com" type="email" v-bind="componentField" />
+              <Input
+                placeholder="Enter your name"
+                type="text"
+                v-bind="componentField"
+                :disabled="loading"
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
         </FormField>
 
-        <FormField v-slot="{ componentField }" name="name">
+        <FormField v-slot="{ componentField }" name="email">
           <FormItem>
-            <FormLabel>Name</FormLabel>
+            <FormLabel>Email</FormLabel>
             <FormControl>
-              <Input placeholder="Enter your name" type="text" v-bind="componentField" />
+              <Input
+                placeholder="example@gmail.com"
+                type="email"
+                v-bind="componentField"
+                :disabled="loading"
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -67,7 +77,12 @@ const onSubmit = form.handleSubmit(async (values) => {
           <FormItem>
             <FormLabel>Password</FormLabel>
             <FormControl>
-              <Input type="password" v-bind="componentField" placeholder="Enter a password" />
+              <Input
+                type="password"
+                v-bind="componentField"
+                placeholder="Enter a password"
+                :disabled="loading"
+              />
             </FormControl>
             <FormMessage />
           </FormItem>

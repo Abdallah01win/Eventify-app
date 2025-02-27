@@ -1,6 +1,6 @@
+import { handelRequestError } from '@/helpers'
 import axios from 'axios'
 import Cookies from 'js-cookie'
-import { handelRequestError } from '@/helpers'
 
 const Axios = axios.create({
   baseURL: import.meta.env.VITE_API_ENDPOINT,
