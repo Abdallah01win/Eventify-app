@@ -1,11 +1,11 @@
 import { z } from '@/plugins'
 import { toTypedSchema } from '@vee-validate/zod'
 
-const loginForm = z.object({
+const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8)
 })
 
-export type LoginForm = z.infer<typeof loginForm>
+export type LoginForm = z.infer<typeof loginSchema>
 
-export default toTypedSchema(loginForm)
+export default toTypedSchema(loginSchema)
