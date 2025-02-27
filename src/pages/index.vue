@@ -1,3 +1,11 @@
+<script setup lang="ts">
+definePage({
+  meta: {
+    requiresAuth: false,
+  }
+})
+</script>
+
 <template>
   <div>
     <h1>Home Page</h1>

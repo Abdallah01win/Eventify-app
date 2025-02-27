@@ -10,6 +10,12 @@ import { ref } from 'vue'
 
 import validationSchema from './components/loginSchema'
 
+definePage({
+  meta: {
+    requiresAuth: false,
+  }
+})
+
 const authStore = useAuthStore()
 
 const loading = ref(false)

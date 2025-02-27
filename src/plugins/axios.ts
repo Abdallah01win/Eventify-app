@@ -1,12 +1,6 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
-import { toast } from 'vue-sonner'
-
-const handelRequestError = (msg?: string) => {
-  toast.error('an-error-occurred', {
-    description: msg || 'something-went-wrong'
-  })
-}
+import { handelRequestError } from '@/helpers'
 
 const Axios = axios.create({
   baseURL: import.meta.env.VITE_API_ENDPOINT,
