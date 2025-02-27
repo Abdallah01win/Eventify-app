@@ -1,6 +1,6 @@
 import vue from '@vitejs/plugin-vue'
 import autoprefixer from 'autoprefixer'
-import path from 'node:path'
+import path from 'path'
 import tailwind from 'tailwindcss'
 import VueRouter from 'unplugin-vue-router/vite'
 import { defineConfig } from 'vite'
