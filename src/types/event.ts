@@ -1,4 +1,4 @@
-import { User } from "."
+import type { User, Category } from "."
 
 export type Event = {
   readonly id: number
@@ -11,5 +11,6 @@ export type Event = {
   startDate: Date
   endDate: Date
   user: User
+  category: Category
   createdAt: Date
 }

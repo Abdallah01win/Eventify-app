@@ -23,9 +23,9 @@ onMounted(() => {
       <div class="mb-4 flex items-center justify-between">
         <div class="flex flex-col">
           <h1 class="text-2xl font-semibold">Events</h1>
-          <p class="text-muted-foreground">Explore events near you.</p>
+          <p class="text-muted-foreground text-sm">Explore events near you.</p>
         </div>
-        <Button>Create an Event</Button>
+        <Button :disabled="loading">Create an Event</Button>
       </div>
 
       <div v-if="loading" class="flex h-44 items-center justify-center">

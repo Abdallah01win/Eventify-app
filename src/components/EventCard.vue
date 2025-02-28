@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
@@ -7,11 +7,11 @@ import {
   CardFooter,
   CardHeader,
   CardTitle
-} from '@/components/ui/Card'
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+} from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
 import { formatDate } from '@/helpers'
 import type { Event } from '@/types'
-import { Calendar, MapPin } from 'lucide-vue-next'
+import { Calendar, MapPin, Users } from 'lucide-vue-next'
 
 defineProps<{ event: Event }>()
 const emit = defineEmits(['join'])
@@ -37,20 +37,15 @@ const emit = defineEmits(['join'])
     <CardContent class="text-sm"> {{ event.description }} </CardContent>
     <CardFooter class="flex justify-between">
       <div class="flex gap-2">
-        <Avatar class="cursor-pointer">
-          <AvatarFallback class="font-semibold uppercase">
-            {{ event.user?.name.substring(0, 2) }}
-          </AvatarFallback>
-        </Avatar>
-
-        <div class="flex flex-col">
-          <span class="text-sm">{{ event.user?.name }}</span>
-          <span class="text-xs text-muted-foreground"
-            >Added: {{ formatDate(event.createdAt) }}</span
-          >
-        </div>
+        <Badge variant="secondary">{{ event.category.name }}</Badge>
+        <Badge variant="secondary">
+          <span class="flex items-center">
+            <Users class="mr-2 h-4 w-4" />
+            {{ event.maxParticipants }}
+          </span>
+        </Badge>
       </div>
-      <Button @click="emit('join', $event)">Join</Button>
+      <Button size="sm" @click="emit('join', $event)">Join</Button>
     </CardFooter>
   </Card>
 </template>

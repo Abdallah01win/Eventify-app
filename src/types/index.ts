@@ -1,6 +1,7 @@
 export * from './auth'
 export * from './user'
 export * from './event'
+export * from './category'
 
 export interface JsonResponse<T = unknown> {
   success: boolean
