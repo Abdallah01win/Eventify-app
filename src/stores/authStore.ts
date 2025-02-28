@@ -1,13 +1,13 @@
 import type { LoginForm, RegisterForm } from '@/pages/auth/components'
 import { axios } from '@/plugins'
 import router from '@/router'
-import type { InitUser } from '@/types'
+import type { InitUser, User } from '@/types'
 import Cookies from 'js-cookie'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const useAuthStore = defineStore('auth', () => {
-  const user = ref<InitUser | null>(null)
+  const user = ref<User | null>(null)
   const loading = ref(false)
 
   const login = (form: LoginForm) => {
@@ -35,8 +35,6 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   const initUser = () => {
-    console.log('called initUser')
-
     return new Promise((resolve, reject) => {
       if (user.value !== null) return resolve(user.value)
 
@@ -49,7 +47,7 @@ export const useAuthStore = defineStore('auth', () => {
         axios
           .post<InitUser>('auth/me')
           .then(({ data }) => {
-            user.value = data
+            user.value = data.data.user
             resolve(data)
           })
           .catch(() => {
@@ -64,7 +62,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   const logout = () => {
     return new Promise((_, reject) => {
-      axios.post('logout').then(
+      axios.post('auth/logout').then(
         () => {
           user.value = null
           Cookies.remove('token')

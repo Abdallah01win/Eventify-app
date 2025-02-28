@@ -4,7 +4,6 @@ import type { NavigationGuardNext, RouteLocation } from 'vue-router'
 
 const authMiddleware = async (to: RouteLocation, _: unknown, next: NavigationGuardNext) => {
   const authStore = useAuthStore()
-  console.log('called authMiddleware')
 
   const isAuthenticated = await authStore.initUser().catch(() => false)
   const requiresAuth = to.meta.requiresAuth !== false
