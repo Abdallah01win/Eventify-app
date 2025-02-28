@@ -47,7 +47,7 @@ export const useEventStore = defineStore('event', () => {
 
   const join = (id: number) => {
     return new Promise((resolve, reject) => {
-      axios.post(`events/${id}/join`).then(
+      axios.post(`events/join/${id}`).then(
         () => resolve(true),
         () => reject()
       )

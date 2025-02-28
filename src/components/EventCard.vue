@@ -14,6 +14,7 @@ import type { Event } from '@/types'
 import { Calendar, MapPin, Users } from 'lucide-vue-next'
 
 defineProps<{ event: Event }>()
+
 const emit = defineEmits(['join'])
 </script>
 
@@ -45,7 +46,7 @@ const emit = defineEmits(['join'])
           </span>
         </Badge>
       </div>
-      <Button size="sm" @click="emit('join', $event)">Join</Button>
+      <Button size="sm" @click="emit('join', event.id)">Join</Button>
     </CardFooter>
   </Card>
 </template>

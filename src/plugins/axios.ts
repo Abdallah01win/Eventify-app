@@ -21,13 +21,18 @@ Axios.interceptors.request.use((config) => {
   return Promise.resolve(config)
 })
 
-Axios.interceptors.response.use((request) => {
-  if (!request.data.success) {
-    handelRequestError(request.data.errors[0])
+Axios.interceptors.response.use(
+  (request) => {
+    if (!request.data.success) {
+      handelRequestError(request.data.errors[0])
+      return Promise.reject()
+    }
+    return request
+  },
+  () => {
+    handelRequestError()
     return Promise.reject()
   }
-
-  return request
-})
+)
 
 export default Axios
