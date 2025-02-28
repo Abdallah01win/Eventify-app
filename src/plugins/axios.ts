@@ -8,7 +8,8 @@ const Axios = axios.create({
   withXSRFToken: true,
   headers: {
     Accept: 'application/json',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Accept-Language': 'en'
   }
 })
 
@@ -20,14 +21,13 @@ Axios.interceptors.request.use((config) => {
   return Promise.resolve(config)
 })
 
-Axios.interceptors.response.use(
-  (request) => request,
-  (error) => {
-    const { success, message } = error
-    handelRequestError(!success && message)
-
-    return Promise.reject(error)
+Axios.interceptors.response.use((request) => {
+  if (!request.data.success) {
+    handelRequestError(request.data.errors[0])
+    return Promise.reject()
   }
-)
+
+  return request
+})
 
 export default Axios

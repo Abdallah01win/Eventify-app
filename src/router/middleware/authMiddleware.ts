@@ -4,6 +4,7 @@ import type { NavigationGuardNext, RouteLocation } from 'vue-router'
 
 const authMiddleware = async (to: RouteLocation, _: unknown, next: NavigationGuardNext) => {
   const authStore = useAuthStore()
+  console.log('called authMiddleware')
 
   const isAuthenticated = await authStore.initUser().catch(() => false)
   const requiresAuth = to.meta.requiresAuth !== false
@@ -11,13 +12,13 @@ const authMiddleware = async (to: RouteLocation, _: unknown, next: NavigationGua
   authStore.resetLoading()
 
   if (requiresAuth && !isAuthenticated) {
-    handelRequestError('This action is nauthorized!')
+    handelRequestError('This action is unauthorized!')
 
     return next({ name: '/auth/login' })
   }
 
   if (['/auth/login', '/auth/register'].includes(to.name) && isAuthenticated)
-    return next({ name: '/' })
+    return next({ name: '/events' })
 
   next()
 }

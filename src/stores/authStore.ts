@@ -15,8 +15,8 @@ export const useAuthStore = defineStore('auth', () => {
       axios
         .post('auth/login', form)
         .then(({ data }) => {
-          Cookies.set('token', data?.token)
-          router.push('/dashboard')
+          Cookies.set('token', data.data?.token)
+          router.push('/events')
         })
         .catch(() => reject())
     })
@@ -27,24 +27,27 @@ export const useAuthStore = defineStore('auth', () => {
       axios
         .post('auth/register', form)
         .then(({ data }) => {
-          Cookies.set('token', data.token)
-          router.push('/dashboard')
+          Cookies.set('token', data.data.token)
+          router.push('/events')
         })
         .catch(() => reject())
     })
   }
 
   const initUser = () => {
+    console.log('called initUser')
+
     return new Promise((resolve, reject) => {
       if (user.value !== null) return resolve(user.value)
 
       const token = Cookies.get('token')
 
       if (token) {
-        if (router.currentRoute.value.name !== '/') loading.value = true
+        if (!['/auth/login', '/auth/register'].includes(router.currentRoute.value.name))
+          loading.value = true
 
         axios
-          .get<InitUser>('auth/me')
+          .post<InitUser>('auth/me')
           .then(({ data }) => {
             user.value = data
             resolve(data)
@@ -65,7 +68,7 @@ export const useAuthStore = defineStore('auth', () => {
         () => {
           user.value = null
           Cookies.remove('token')
-          router.push('/')
+          router.push('/auth/login')
         },
         () => reject()
       )
