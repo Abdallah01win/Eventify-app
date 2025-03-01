@@ -1,9 +1,13 @@
 import { axios } from '@/plugins'
 import type { Event } from '@/types'
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+
+import { useAuthStore } from './authStore'
 
 export const useEventStore = defineStore('event', () => {
+  const authStore = useAuthStore()
+
   const events = ref<Event[]>([])
 
   const fetch = () => {
@@ -54,12 +58,22 @@ export const useEventStore = defineStore('event', () => {
     })
   }
 
+  const getUserEvents = computed(() =>
+    events.value.filter((e) => e.userId === authStore.user?.id || e.participants.length)
+  )
+
+  const getExploreEvents = computed(() =>
+    events.value.filter((e) => e.userId !== authStore.user?.id && !e.participants.length)
+  )
+
   return {
     events,
     fetch,
     create,
     update,
     remove,
-    join
+    join,
+    getUserEvents,
+    getExploreEvents
   }
 })

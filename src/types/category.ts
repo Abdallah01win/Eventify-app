@@ -1,5 +1,5 @@
 export type Category = {
-    readonly id: number;
-    name: string;
-    slug: string;
+  readonly id: number
+  name: string
+  slug: string
 }

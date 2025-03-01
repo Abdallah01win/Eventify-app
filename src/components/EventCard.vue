@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -8,14 +9,19 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { formatDate } from '@/helpers'
+import { useAuthStore } from '@/stores/authStore'
 import type { Event } from '@/types'
-import { Calendar, MapPin, Users } from 'lucide-vue-next'
+import { Armchair, Calendar, MapPin, Users } from 'lucide-vue-next'
 
-defineProps<{ event: Event }>()
+const props = defineProps<{ event: Event }>()
+const emit = defineEmits(['join', 'leave'])
 
-const emit = defineEmits(['join'])
+const authStore = useAuthStore()
+
+const isParticipating = () => {
+  return props.event.participants.some((p) => p.userId === authStore.user?.id)
+}
 </script>
 
 <template>
@@ -42,11 +48,24 @@ const emit = defineEmits(['join'])
         <Badge variant="secondary">
           <span class="flex items-center">
             <Users class="mr-2 h-4 w-4" />
-            {{ event.maxParticipants }}
+            {{ event.participantsCount }}
+          </span>
+        </Badge>
+        <Badge variant="secondary">
+          <span class="flex items-center">
+            <Armchair class="mr-2 h-4 w-4" />
+            {{ event.maxParticipants - event.participantsCount }}
           </span>
         </Badge>
       </div>
-      <Button size="sm" @click="emit('join', event.id)">Join</Button>
+      <Button v-if="isParticipating()" size="sm" @click="emit('leave', event.id)">Leave</Button>
+      <Button
+        v-else
+        size="sm"
+        :disabled="event.maxParticipants === event.participantsCount"
+        @click="emit('join', event.id)"
+        >Join</Button
+      >
     </CardFooter>
   </Card>
 </template>
