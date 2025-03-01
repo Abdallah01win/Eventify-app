@@ -12,13 +12,13 @@ export const useEventStore = defineStore('event', () => {
 
   const fetch = () => {
     return new Promise((resolve, reject) => {
-      axios
-        .get('events')
-        .then(({ data }) => {
+      axios.get('events').then(
+        ({ data }) => {
           events.value = data.data.items
           resolve(true)
-        })
-        .catch(() => reject())
+        },
+        () => reject()
+      )
     })
   }
 
@@ -40,7 +40,7 @@ export const useEventStore = defineStore('event', () => {
     })
   }
 
-  const remove = (id: number) => {
+  const destroy = (id: number) => {
     return new Promise((resolve, reject) => {
       axios.delete(`events/${id}`).then(
         () => resolve(true),
@@ -52,8 +52,29 @@ export const useEventStore = defineStore('event', () => {
   const join = (id: number) => {
     return new Promise((resolve, reject) => {
       axios.post(`events/join/${id}`).then(
-        () => resolve(true),
+        () => {
+          fetch().then(
+            () => resolve(true),
+            () => reject()
+          )
+        },
         () => reject()
+      )
+    })
+  }
+
+  const leave = (id: number) => {
+    return new Promise((resolve, reject) => {
+      axios.post(`events/leave/${id}`).then(
+        () => {
+          fetch().then(
+            () => resolve(true),
+            () => reject()
+          )
+        },
+        () => {
+          reject()
+        }
       )
     })
   }
@@ -71,8 +92,9 @@ export const useEventStore = defineStore('event', () => {
     fetch,
     create,
     update,
-    remove,
+    destroy,
     join,
+    leave,
     getUserEvents,
     getExploreEvents
   }

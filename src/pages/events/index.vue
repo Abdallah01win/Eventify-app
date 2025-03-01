@@ -7,25 +7,26 @@ import { useEventStore } from '@/stores/eventStore'
 import { CirclePlus, Loader2 } from 'lucide-vue-next'
 import { onMounted, ref } from 'vue'
 
+import ConfirmationDialog from './components/ConfirmationDialog.vue'
 import CreateUpdateDialog from './components/CreateUpdateDialog.vue'
-import JoinDialog from './components/JoinDialog.vue'
 
 const eventStore = useEventStore()
 
 const loading = ref(false)
 const open = ref(false)
-const JoinOpen = ref(false)
+const joinOpen = ref(false)
+const leaveOpen = ref(false)
 const event = ref<Event | null>(null)
 const eventId = ref<number | null>(null)
 
-const handleJoin = (event: number) => {
-  eventId.value = event
-  JoinOpen.value = true
+const handleJoin = (id: number) => {
+  eventId.value = id
+  joinOpen.value = true
 }
 
-const handleLeave = (event: number) => {
-  eventId.value = event
-  JoinOpen.value = true
+const handleLeave = (id: number) => {
+  eventId.value = id
+  leaveOpen.value = true
 }
 
 const handleCreate = () => {
@@ -47,8 +48,8 @@ onMounted(() => {
       <Tabs default-value="explore">
         <div class="mb-4 flex items-center justify-between">
           <TabsList>
-            <TabsTrigger value="explore"> Explore </TabsTrigger>
-            <TabsTrigger value="my-events"> My events </TabsTrigger>
+            <TabsTrigger value="explore">Explore</TabsTrigger>
+            <TabsTrigger value="my-events">My events</TabsTrigger>
           </TabsList>
 
           <Button :disabled="loading" @click="handleCreate">
@@ -81,7 +82,12 @@ onMounted(() => {
             </div>
           </div>
 
-          <JoinDialog :open="JoinOpen" :eventId @update:open="JoinOpen = $event" />
+          <ConfirmationDialog
+            type="join"
+            :open="joinOpen"
+            :eventId
+            @update:open="joinOpen = $event"
+          />
         </TabsContent>
 
         <TabsContent value="my-events">
@@ -107,6 +113,13 @@ onMounted(() => {
               />
             </div>
           </div>
+
+          <ConfirmationDialog
+            type="leave"
+            :open="leaveOpen"
+            :eventId
+            @update:open="leaveOpen = $event"
+          />
         </TabsContent>
       </Tabs>
     </template>

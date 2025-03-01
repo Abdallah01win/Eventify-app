@@ -13,21 +13,24 @@ import { useEventStore } from '@/stores/eventStore'
 import { Loader2 } from 'lucide-vue-next'
 import { ref } from 'vue'
 
-const props = defineProps<{ open: boolean; eventId: number | null }>()
+const props = defineProps<{ open: boolean; eventId: number | null; type: 'join' | 'leave' }>()
 const emit = defineEmits(['update:open'])
 
 const eventStore = useEventStore()
 
 const loading = ref(false)
 
-const joinEvent = () => {
+const closeDialog = () => {
+  emit('update:open', false)
+  loading.value = false
+}
+
+const confirm = () => {
   loading.value = true
 
   if (props.eventId)
-    eventStore.join(props.eventId).finally(() => {
-      emit('update:open', false)
-      loading.value = false
-    })
+    if (props.type === 'join') eventStore.join(props.eventId).finally(closeDialog)
+    else eventStore.leave(props.eventId).finally(closeDialog)
 }
 </script>
 
@@ -35,17 +38,24 @@ const joinEvent = () => {
   <Dialog :open="props.open && !!eventId" @update:open="emit('update:open', $event)">
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>Confirm Event Joining</DialogTitle>
+        <DialogTitle>{{
+          type === 'join' ? 'Confirm Event Joining' : 'Confirm Leaving the Event'
+        }}</DialogTitle>
         <DialogClose />
       </DialogHeader>
 
-      <DialogDescription>
+      <DialogDescription v-if="type === 'join'">
         Are you sure you want to join this event? Your <strong>Name</strong> and
         <strong>Email address</strong> will be shared with the event creator. Please confirm below.
       </DialogDescription>
 
+      <DialogDescription v-else>
+        Are you sure you want to leave this event? you may not be able to re-join this event if all
+        seats are taken. Please confirm below.
+      </DialogDescription>
+
       <DialogFooter>
-        <Button :disabled="loading" @click="joinEvent()">
+        <Button :disabled="loading" @click="confirm()">
           <Loader2 v-if="loading" class="mr-2 h-4 w-4 animate-spin" />
           Confirm
         </Button>
