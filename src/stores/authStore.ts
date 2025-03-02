@@ -12,25 +12,25 @@ export const useAuthStore = defineStore('auth', () => {
 
   const login = (form: LoginForm) => {
     return new Promise((_, reject) => {
-      axios
-        .post('auth/login', form)
-        .then(({ data }) => {
+      axios.post('auth/login', form).then(
+        ({ data }) => {
           Cookies.set('token', data.data?.token)
-          router.push('/events')
-        })
-        .catch(() => reject())
+          router.push('/events/')
+        },
+        () => reject()
+      )
     })
   }
 
   const register = (form: RegisterForm) => {
     return new Promise((_, reject) => {
-      axios
-        .post('auth/register', form)
-        .then(({ data }) => {
+      axios.post('auth/register', form).then(
+        ({ data }) => {
           Cookies.set('token', data.data.token)
-          router.push('/events')
-        })
-        .catch(() => reject())
+          router.push('/events/')
+        },
+        () => reject()
+      )
     })
   }
 
@@ -44,16 +44,16 @@ export const useAuthStore = defineStore('auth', () => {
         if (!['/auth/login', '/auth/register'].includes(router.currentRoute.value.name))
           loading.value = true
 
-        axios
-          .post<InitUser>('auth/me')
-          .then(({ data }) => {
-            user.value = data.data.user
-            resolve(data)
-          })
-          .catch(() => {
+        axios.post<InitUser>('auth/me').then(
+          ({ data }) => {
+            if (data.data) user.value = data.data?.user
+            resolve(true)
+          },
+          () => {
             Cookies.remove('token')
-            reject(null)
-          })
+            reject()
+          }
+        )
       } else {
         reject()
       }
