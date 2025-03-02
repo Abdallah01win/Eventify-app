@@ -5,7 +5,6 @@ export type Event = {
   userId: number
   title: string
   description: string
-  date: string
   location: string
   maxParticipants: number
   participantsCount: number
