@@ -11,9 +11,3 @@ export const handelRequestError = (msg?: string) => {
 export const formatDate = (date: unknown, format: DateFormats = DateFormats.LONG) => {
   return dayjs(String(date)).format(format)
 }
-
-export const asideSizes = {
-  collapsed: 4,
-  min: 15,
-  max: 20
-}

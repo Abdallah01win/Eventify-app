@@ -11,11 +11,6 @@ import EventTab from './components/EventTab.vue'
 const eventStore = useEventStore()
 
 const loading = ref(false)
-const open = ref(false)
-
-const handleCreate = () => {
-  open.value = true
-}
 
 onMounted(() => {
   loading.value = true
@@ -36,7 +31,7 @@ onMounted(() => {
             <TabsTrigger value="my-events">My events</TabsTrigger>
           </TabsList>
 
-          <Button :disabled="loading" @click="handleCreate">
+          <Button :disabled="loading">
             <CirclePlus class="mr-1 h-4 w-4" />
             Create event
           </Button>

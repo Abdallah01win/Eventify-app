@@ -72,9 +72,7 @@ export const useEventStore = defineStore('event', () => {
             () => reject()
           )
         },
-        () => {
-          reject()
-        }
+        () => reject()
       )
     })
   }

@@ -1,11 +1,7 @@
 <script setup lang="ts">
 import { Separator } from '@/components/ui/separator'
 
-// import NotificationDropDown from './NotificationDropDown.vue'
 import ProfileDropDown from './components/ProfileDropDown.vue'
-
-// import SearchCommand from './SearchCommand.vue'
-// import SettingsDropDown from './SettingsDropDown.vue'
 </script>
 
 <template>

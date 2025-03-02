@@ -9,11 +9,6 @@ export interface JsonResponse<T = unknown> {
   data?: T
 }
 
-export interface Route {
-  name: string
-  icon: string
-}
-
 export enum DateFormats {
   DATE = 'YYYY-MM-DD',
   DATETIME = 'YYYY-MM-DD HH:mm:ss',

@@ -1,4 +1,4 @@
-import type { Category, User } from '.'
+import type { Category } from '.'
 
 export type Event = {
   readonly id: number
@@ -12,7 +12,6 @@ export type Event = {
   participants: { id: number; userId: number }[]
   startDate: Date
   endDate: Date
-  user: User
   category: Category
   createdAt: Date
 }
