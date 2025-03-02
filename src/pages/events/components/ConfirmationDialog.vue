@@ -56,7 +56,7 @@ const confirm = () => {
 
       <DialogFooter>
         <Button :disabled="loading" @click="confirm()">
-          <Loader2 v-if="loading" class="mr-2 h-4 w-4 animate-spin" />
+          <Loader2 v-if="loading" class="mr-1 h-4 w-4 animate-spin" />
           Confirm
         </Button>
         <DialogClose as-child>
