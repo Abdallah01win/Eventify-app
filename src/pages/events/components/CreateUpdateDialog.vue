@@ -22,8 +22,9 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { formatDate, resetForm } from '@/helpers'
+import { useCategoryStore } from '@/stores/categoryStore'
 import { useEventStore } from '@/stores/eventStore'
-import { DateFormats, type Event } from '@/types'
+import { DateFormats } from '@/types'
 import { parseDate } from '@internationalized/date'
 import dayjs from 'dayjs'
 import { Loader2 } from 'lucide-vue-next'
@@ -32,19 +33,22 @@ import { computed, ref, watch } from 'vue'
 
 import validationSchema from './validationSchema'
 
-const props = defineProps<{ open: boolean; event: Partial<Event> | null }>()
+const props = defineProps<{ open: boolean; event: any }>()
 const emit = defineEmits(['update:open', 'refresh'])
 
 const eventStore = useEventStore()
+const categoryStore = useCategoryStore()
+
+const { DATE } = DateFormats
 
 const initForm = {
   categoryId: null,
-  title: '',
+  title: null,
   maxParticipants: 1,
   startDate: null,
   endDate: null,
-  location: '',
-  description: ''
+  location: null,
+  description: null
 }
 
 const form = ref({ ...initForm })
@@ -58,8 +62,8 @@ watch(
     form.value = isEdit.value
       ? {
           ...props.event,
-          startDate: parseDate(dayjs(props.event?.startDate).format(DateFormats.DATE)),
-          endDate: parseDate(dayjs(props.event?.endDate).format(DateFormats.DATE))
+          startDate: parseDate(formatDate(props.event?.startDate, DATE)),
+          endDate: parseDate(formatDate(props.event?.startDate, DATE))
         }
       : { ...initForm }
   },
@@ -75,15 +79,16 @@ const onSubmit = () => {
   loading.value = true
 
   const { startDate, endDate } = form.value
+
   const data = {
     ...form.value,
-    startDate: formatDate(startDate, DateFormats.DATE),
-    endDate: formatDate(endDate, DateFormats.DATE)
+    startDate: formatDate(startDate, DATE),
+    endDate: formatDate(endDate, DATE)
   }
 
   if (isEdit.value) {
     eventStore
-      .update(data.id, data)
+      .update(data)
       .then(emitSaveEvents)
       .finally(() => (loading.value = false))
   } else {
@@ -91,7 +96,7 @@ const onSubmit = () => {
       .create(data)
       .then(() => {
         emitSaveEvents()
-        resetForm(form, structuredClone(initForm))
+        resetForm(form, initForm)
       })
       .finally(() => (loading.value = false))
   }
@@ -114,7 +119,11 @@ const onSubmit = () => {
             <FormItem>
               <FormLabel for="categoryId">Category</FormLabel>
               <FormControl id="categoryId">
-                <Combobox v-bind="componentField" :options="[]" placeholder="Select a category" />
+                <Combobox
+                  v-bind="componentField"
+                  :options="categoryStore.getCategoryOptions()"
+                  placeholder="Select a category"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
