@@ -11,13 +11,13 @@ const authMiddleware = async (to: RouteLocation, _: unknown, next: NavigationGua
   authStore.resetLoading()
 
   if (requiresAuth && !isAuthenticated) {
-    handelRequestError('This action is nauthorized!')
+    handelRequestError('This action is unauthorized!')
 
     return next({ name: '/auth/login' })
   }
 
   if (['/auth/login', '/auth/register'].includes(to.name) && isAuthenticated)
-    return next({ name: '/' })
+    return next({ name: '/events/' })
 
   next()
 }

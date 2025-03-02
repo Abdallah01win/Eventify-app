@@ -6,6 +6,8 @@
       </div>
     </div>
 
-    <div class="hidden h-screen bg-muted lg:block"></div>
+    <div class="hidden h-screen bg-muted lg:block">
+      <img src="@/assets/images/auth.webp" alt="Authentication" class="h-full object-cover" />
+    </div>
   </div>
 </template>

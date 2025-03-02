@@ -3,6 +3,8 @@ import { routes } from 'vue-router/auto-routes'
 
 import authMiddleware from './middleware/authMiddleware'
 
+export * from './utils'
+
 const router = createRouter({
   history: createWebHistory(),
   routes
