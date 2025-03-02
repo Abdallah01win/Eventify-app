@@ -11,6 +11,7 @@ const props = defineProps<{
   type: 'explore' | 'my-events'
   loading: boolean
 }>()
+const emit = defineEmits(['update', 'delete'])
 
 const eventStore = useEventStore()
 
@@ -57,6 +58,8 @@ const handleJoinOrLeave = (id: number) => {
           :event="e"
           @join="handleJoinOrLeave"
           @leave="handleJoinOrLeave"
+          @update="emit('update', $event)"
+          @delete="emit('delete', $event)"
         />
       </div>
       <div v-else class="flex h-56 flex-col items-center justify-center text-muted-foreground">

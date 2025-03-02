@@ -34,3 +34,13 @@ export type NumberInputProps = {
   disabled?: boolean
   class?: HTMLAttributes['class']
 }
+
+export type Options<T> = { label: string; value: T; disabled?: boolean }[]
+
+export type ComboboxProps = {
+  options: Options<number | string>
+  placeholder: string
+  disabled?: boolean
+  size?: 'base' | 'sm'
+  modelValue?: string | number
+}

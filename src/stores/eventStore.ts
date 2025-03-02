@@ -1,3 +1,4 @@
+import type { EventForm } from '@/pages/events/components/validationSchema'
 import { axios } from '@/plugins'
 import type { Event } from '@/types'
 import { defineStore } from 'pinia'
@@ -22,7 +23,7 @@ export const useEventStore = defineStore('event', () => {
     })
   }
 
-  const create = (eventData: Partial<Event>) => {
+  const create = (eventData: Partial<EventForm>) => {
     return new Promise((resolve, reject) => {
       axios.post('events', eventData).then(
         () => resolve(true),
@@ -31,7 +32,7 @@ export const useEventStore = defineStore('event', () => {
     })
   }
 
-  const update = (id: number, eventData: Partial<Event>) => {
+  const update = (id: number, eventData: Partial<EventForm>) => {
     return new Promise((resolve, reject) => {
       axios.put(`events/${id}`, eventData).then(
         () => resolve(true),

@@ -4,7 +4,7 @@ import { Calendar } from '@/components/ui/calendar'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { formatDate } from '@/helpers'
 import { cn } from '@/lib/utils'
-import { DateFormats, type DatePickerCustomProps } from '@/types'
+import type { DatePickerCustomProps } from '@/types'
 import { parseDate } from '@internationalized/date'
 import { Calendar as CalendarIcon } from 'lucide-vue-next'
 import { type CalendarRootEmits, useForwardPropsEmits } from 'radix-vue'
@@ -18,8 +18,6 @@ const props = withDefaults(defineProps<DatePickerCustomProps>(), {
 })
 
 const emits = defineEmits<CalendarRootEmits>()
-
-const { DATE } = DateFormats
 
 const delegatedProps = computed(() => {
   const { modelValue, ...delegated } = props
@@ -46,7 +44,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
         "
       >
         <CalendarIcon v-if="hasIcon" class="mr-2 h-4 w-4" />
-        {{ forwarded.modelValue ? formatDate(forwarded.modelValue, DATE) : 'Pick a date' }}
+        {{ forwarded.modelValue ? formatDate(forwarded.modelValue) : 'Pick a date' }}
       </Button>
     </PopoverTrigger>
     <PopoverContent class="w-auto p-0">

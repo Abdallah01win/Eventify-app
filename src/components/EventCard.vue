@@ -15,7 +15,7 @@ import type { Event } from '@/types'
 import { Armchair, Calendar, MapPin, Users } from 'lucide-vue-next'
 
 const props = defineProps<{ event: Event }>()
-const emit = defineEmits(['join', 'leave'])
+const emit = defineEmits(['join', 'leave', 'update', 'delete'])
 
 const authStore = useAuthStore()
 
@@ -58,7 +58,14 @@ const isParticipating = () => {
           </span>
         </Badge>
       </div>
-      <Button v-if="isParticipating()" size="sm" @click="emit('leave', event.id)">Leave</Button>
+
+      <div v-if="event.userId === authStore.user?.id" class="flex items-center gap-x-2">
+        <Button size="sm" @click="emit('update', event)">Update</Button>
+        <Button variant="secondary" size="sm" @click="emit('delete', event.id)">Delete</Button>
+      </div>
+      <Button v-else-if="isParticipating()" size="sm" @click="emit('leave', event.id)">
+        Leave
+      </Button>
       <Button
         v-else
         size="sm"
