@@ -6,14 +6,12 @@ import { useEventStore } from '@/stores/eventStore'
 import { CirclePlus } from 'lucide-vue-next'
 import { onMounted, ref } from 'vue'
 
-import CreateUpdateDialog from './components/CreateUpdateDialog.vue'
 import EventTab from './components/EventTab.vue'
 
 const eventStore = useEventStore()
 
 const loading = ref(false)
 const open = ref(false)
-const event = ref<Event | null>(null)
 
 const handleCreate = () => {
   open.value = true
