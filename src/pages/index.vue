@@ -12,5 +12,6 @@ definePage({
     <p>Click on the links below to navigate to the respective pages</p>
     <RouterLink to="/auth/login">login</RouterLink>
     <RouterLink to="/auth/register">register</RouterLink>
+    <RouterLink to="/events">events</RouterLink>
   </div>
 </template>
