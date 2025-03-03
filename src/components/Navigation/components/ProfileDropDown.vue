@@ -22,7 +22,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { useAuthStore } from '@/stores/authStore'
-import { Loader2, LogOut, User2 } from 'lucide-vue-next'
+import { Loader2, LogOut } from 'lucide-vue-next'
 import { ref } from 'vue'
 
 const authStore = useAuthStore()
@@ -56,14 +56,6 @@ const logoutUser = () => {
             <DropdownMenuLabel class="text-center">{{ authStore.user?.name }}</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <RouterLink to="/profile">
-                <DropdownMenuItem>
-                  <User2 class="mr-2 h-4 w-4" />
-                  <span>Profile</span>
-                </DropdownMenuItem>
-              </RouterLink>
-              <DropdownMenuSeparator />
-
               <DialogTrigger class="w-full">
                 <DropdownMenuItem>
                   <LogOut class="mr-2 h-4 w-4" />
@@ -85,7 +77,7 @@ const logoutUser = () => {
 
       <DialogFooter>
         <Button @click="logoutUser">
-          <Loader2 v-if="loading" class="mr-2 h-4 w-4 animate-spin" />
+          <Loader2 v-if="loading" class="mr-1 h-4 w-4 animate-spin" />
           Logout
         </Button>
         <DialogClose as-child>

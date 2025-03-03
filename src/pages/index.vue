@@ -35,7 +35,7 @@ import { Armchair } from 'lucide-vue-next'
                   class="h-12 w-12 overflow-hidden rounded-full border border-white bg-background shadow-lg transition-transform duration-200 hover:-translate-y-1"
                 >
                   <img
-                    src="@/assets/images/auth.webp"
+                    src="@/assets/images/customers/1.webp"
                     alt="Company logo"
                     class="h-full w-full rounded-full object-cover p-1 opacity-80 transition-opacity hover:opacity-100"
                   />
@@ -47,7 +47,7 @@ import { Armchair } from 'lucide-vue-next'
                   class="h-12 w-12 overflow-hidden rounded-full border border-white bg-background shadow-lg transition-transform duration-200 hover:-translate-y-1"
                 >
                   <img
-                    src="@/assets/images/auth.webp"
+                    src="@/assets/images/customers/2.webp"
                     alt="Company logo"
                     class="h-full w-full rounded-full object-cover p-1 opacity-80 transition-opacity hover:opacity-100"
                   />
@@ -59,7 +59,7 @@ import { Armchair } from 'lucide-vue-next'
                   class="h-12 w-12 overflow-hidden rounded-full border border-white bg-background shadow-lg transition-transform duration-200 hover:-translate-y-1"
                 >
                   <img
-                    src="@/assets/images/auth.webp"
+                    src="@/assets/images/customers/3.webp"
                     alt="Company logo"
                     class="h-full w-full rounded-full object-cover p-1 opacity-80 transition-opacity hover:opacity-100"
                   />
@@ -71,7 +71,7 @@ import { Armchair } from 'lucide-vue-next'
                   class="h-12 w-12 overflow-hidden rounded-full border border-white bg-background shadow-lg transition-transform duration-200 hover:-translate-y-1"
                 >
                   <img
-                    src="@/assets/images/auth.webp"
+                    src="@/assets/images/customers/4.webp"
                     alt="Company logo"
                     class="h-full w-full rounded-full object-cover p-1 opacity-80 transition-opacity hover:opacity-100"
                   />
