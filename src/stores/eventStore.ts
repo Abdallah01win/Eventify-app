@@ -22,7 +22,7 @@ export const useEventStore = defineStore('event', () => {
     })
   }
 
-  const create = (eventData: Partial<Event>) => {
+  const create = (eventData: any) => {
     return new Promise((resolve, reject) => {
       axios.post('events', eventData).then(
         () => resolve(true),
@@ -31,9 +31,9 @@ export const useEventStore = defineStore('event', () => {
     })
   }
 
-  const update = (id: number, eventData: Partial<Event>) => {
+  const update = (eventData: any) => {
     return new Promise((resolve, reject) => {
-      axios.put(`events/${id}`, eventData).then(
+      axios.put(`events/${eventData.id}`, eventData).then(
         () => resolve(true),
         () => reject()
       )
@@ -43,7 +43,12 @@ export const useEventStore = defineStore('event', () => {
   const destroy = (id: number) => {
     return new Promise((resolve, reject) => {
       axios.delete(`events/${id}`).then(
-        () => resolve(true),
+        () => {
+          fetch().then(
+            () => resolve(true),
+            () => reject()
+          )
+        },
         () => reject()
       )
     })

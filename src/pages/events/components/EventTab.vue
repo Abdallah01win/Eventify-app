@@ -7,39 +7,54 @@ import { computed, ref } from 'vue'
 
 import ConfirmationDialog from './ConfirmationDialog.vue'
 
+type DialogType = 'join' | 'leave' | 'delete'
+
 const props = defineProps<{
   type: 'explore' | 'my-events'
   loading: boolean
 }>()
+const emit = defineEmits(['update', 'delete'])
 
 const eventStore = useEventStore()
 
+const tabs = [
+  {
+    value: 'explore',
+    title: 'Explore',
+    description: 'Explore events near you.'
+  },
+  {
+    value: 'my-events',
+    title: 'My events',
+    description: 'Manage your events and participations.'
+  }
+]
+
 const open = ref(false)
+const dialogType = ref<DialogType>('join')
 const eventId = ref<number | null>(null)
 
+const tab = computed(() => tabs.find((t) => t.value === props.type)!)
 const events = computed(() =>
   props.type === 'explore' ? eventStore.getExploreEvents : eventStore.getUserEvents
 )
 
-const handleJoinOrLeave = (id: number) => {
-  eventId.value = id
+const openDialog = (e: { type: DialogType; val: number }) => {
+  dialogType.value = e.type
+  eventId.value = e.val
   open.value = true
 }
 </script>
 
 <template>
-  <TabsContent :value="type">
+  <TabsContent :value="tab.value">
     <div class="mb-4 flex items-center justify-between">
       <div class="flex flex-col">
         <h2 class="text-2xl font-semibold tracking-tight">
-          {{ type === 'explore' ? 'Events' : 'My events' }}
+          {{ tab.title }}
         </h2>
         <p class="text-sm text-muted-foreground">
-          {{
-            type === 'explore'
-              ? 'Explore events near you.'
-              : 'Manage your events and participations.'
-          }}
+          {{ tab.description }}
         </p>
       </div>
 
@@ -55,8 +70,10 @@ const handleJoinOrLeave = (id: number) => {
           v-for="e in events"
           :key="e.id"
           :event="e"
-          @join="handleJoinOrLeave"
-          @leave="handleJoinOrLeave"
+          @join="openDialog"
+          @leave="openDialog"
+          @update="emit('update', $event)"
+          @delete="openDialog"
         />
       </div>
       <div v-else class="flex h-56 flex-col items-center justify-center text-muted-foreground">
@@ -65,11 +82,6 @@ const handleJoinOrLeave = (id: number) => {
       </div>
     </div>
 
-    <ConfirmationDialog
-      :type="type === 'explore' ? 'join' : 'leave'"
-      :open
-      :eventId
-      @update:open="open = $event"
-    />
+    <ConfirmationDialog :type="dialogType" :open :eventId @update:open="open = $event" />
   </TabsContent>
 </template>

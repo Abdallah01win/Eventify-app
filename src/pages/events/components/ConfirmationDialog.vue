@@ -11,14 +11,41 @@ import {
 } from '@/components/ui/dialog'
 import { useEventStore } from '@/stores/eventStore'
 import { Loader2 } from 'lucide-vue-next'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
-const props = defineProps<{ open: boolean; eventId: number | null; type: 'join' | 'leave' }>()
+const props = defineProps<{
+  open: boolean
+  eventId: number | null
+  type: 'join' | 'leave' | 'delete'
+}>()
 const emit = defineEmits(['update:open'])
 
 const eventStore = useEventStore()
 
 const loading = ref(false)
+
+const actions = [
+  {
+    type: 'join',
+    title: 'Join Event',
+    message:
+      'Are you sure you want to join this event? Your Name and Email address will be shared with the event creator. Please confirm below.'
+  },
+  {
+    type: 'leave',
+    title: 'Leave Event',
+    message:
+      'Are you sure you want to leave this event? you may not be able to re-join this event if all seats are taken. Please confirm below.'
+  },
+  {
+    type: 'delete',
+    title: 'Delete Event',
+    message:
+      'Are you sure you want to delete this event? This action is irriversable and cannot be undone. Please confirm below.'
+  }
+]
+
+const action = computed(() => actions.find((a) => a.type === props.type))
 
 const closeDialog = () => {
   emit('update:open', false)
@@ -30,7 +57,8 @@ const confirm = () => {
 
   if (props.eventId)
     if (props.type === 'join') eventStore.join(props.eventId).finally(closeDialog)
-    else eventStore.leave(props.eventId).finally(closeDialog)
+    else if (props.type === 'leave') eventStore.leave(props.eventId).finally(closeDialog)
+    else eventStore.destroy(props.eventId).finally(closeDialog)
 }
 </script>
 
@@ -38,22 +66,10 @@ const confirm = () => {
   <Dialog :open="props.open && !!eventId" @update:open="emit('update:open', $event)">
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>{{
-          type === 'join' ? 'Confirm Event Joining' : 'Confirm Leaving the Event'
-        }}</DialogTitle>
+        <DialogTitle>{{ action?.title }}</DialogTitle>
         <DialogClose />
       </DialogHeader>
-
-      <DialogDescription v-if="type === 'join'">
-        Are you sure you want to join this event? Your <strong>Name</strong> and
-        <strong>Email address</strong> will be shared with the event creator. Please confirm below.
-      </DialogDescription>
-
-      <DialogDescription v-else>
-        Are you sure you want to leave this event? you may not be able to re-join this event if all
-        seats are taken. Please confirm below.
-      </DialogDescription>
-
+      <DialogDescription>{{ action?.message }}</DialogDescription>
       <DialogFooter>
         <Button :disabled="loading" @click="confirm()">
           <Loader2 v-if="loading" class="mr-1 h-4 w-4 animate-spin" />

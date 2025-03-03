@@ -1,3 +1,6 @@
+import type { CalendarRootProps } from 'radix-vue'
+import type { HTMLAttributes } from 'vue'
+
 export * from './auth'
 export * from './user'
 export * from './event'
@@ -14,4 +17,30 @@ export enum DateFormats {
   DATETIME = 'YYYY-MM-DD HH:mm:ss',
   TIME = 'HH:mm:ss',
   LONG = 'LL'
+}
+
+export type DatePickerCustomProps = CalendarRootProps & {
+  disabled?: boolean
+  class?: HTMLAttributes['class']
+  size?: 'base' | 'sm'
+  hasIcon?: boolean
+}
+
+export type NumberInputProps = {
+  defaultValue?: number
+  modelValue?: number | string
+  min?: number | false
+  max?: number
+  disabled?: boolean
+  class?: HTMLAttributes['class']
+}
+
+export type Options<T> = { label: string; value: T; disabled?: boolean }[]
+
+export type ComboboxProps = {
+  options: Options<number | string>
+  placeholder: string
+  disabled?: boolean
+  size?: 'base' | 'sm'
+  modelValue?: string | number
 }
