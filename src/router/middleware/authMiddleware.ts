@@ -1,4 +1,5 @@
 import { handelRequestError } from '@/helpers'
+import { isProtected } from '@/router'
 import { useAuthStore } from '@/stores/authStore'
 import type { NavigationGuardNext, RouteLocation } from 'vue-router'
 
@@ -6,7 +7,7 @@ const authMiddleware = async (to: RouteLocation, _: unknown, next: NavigationGua
   const authStore = useAuthStore()
 
   const isAuthenticated = await authStore.initUser().catch(() => false)
-  const requiresAuth = to.meta.requiresAuth !== false
+  const requiresAuth = Boolean(isProtected(to.path))
 
   authStore.resetLoading()
 
