@@ -56,7 +56,7 @@ onMounted(() => {
             <TabsTrigger value="my-events">My events</TabsTrigger>
           </TabsList>
 
-          <Button :disabled="loading" @click="toggelDialog()">
+          <Button v-can="'events.create'" :disabled="loading" @click="toggelDialog()">
             <CirclePlus class="mr-1 h-4 w-4" />
             Create event
           </Button>
