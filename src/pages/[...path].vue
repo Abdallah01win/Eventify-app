@@ -5,12 +5,6 @@ import { ArrowLeft } from 'lucide-vue-next'
 
 <template>
   <main class="relative flex h-screen w-full flex-col items-center justify-center bg-background">
-    <div class="absolute inset-0 -z-10 opacity-5">
-      <div
-        class="absolute h-full w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"
-      ></div>
-    </div>
-
     <div class="text-center">
       <h1 class="relative">
         <span class="text-[150px] font-bold text-primary/10 lg:text-[250px]">404</span>

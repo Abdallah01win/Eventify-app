@@ -7,12 +7,6 @@ import { Armchair } from 'lucide-vue-next'
 <template>
   <Navigation />
   <section class="relative overflow-hidden bg-background lg:h-[var(--view-height)]">
-    <div class="absolute inset-0 -z-10 opacity-5">
-      <div
-        class="absolute h-full w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"
-      ></div>
-    </div>
-
     <div class="container mx-auto px-4 py-20 sm:px-6 lg:px-8">
       <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-8">
         <div class="max-w-xl">
