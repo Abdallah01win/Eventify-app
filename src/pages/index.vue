@@ -29,7 +29,7 @@ import { Armchair } from 'lucide-vue-next'
               <Button class="rounded-lg px-8 py-3">Start Planning Free</Button>
             </RouterLink>
             <RouterLink to="/" class="contents">
-              <Button variant="secondary" class="rounded-lg px-8 py-3">Watch Demo</Button>
+              <Button variant="outline" class="rounded-lg px-8 py-3">Watch Demo</Button>
             </RouterLink>
           </div>
 
