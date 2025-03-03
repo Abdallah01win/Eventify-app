@@ -37,7 +37,7 @@ const handleUpdate = (e: Event) => {
 }
 
 const handleDelete = (id: number) => {
-  eventStore.destroy(id).then(fetchData)
+  eventStore.destroy(id)
 }
 
 onMounted(() => {

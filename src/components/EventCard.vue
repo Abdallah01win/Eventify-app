@@ -61,16 +61,25 @@ const isParticipating = () => {
 
       <div v-if="event.userId === authStore.user?.id" class="flex items-center gap-x-2">
         <Button size="sm" @click="emit('update', event)">Update</Button>
-        <Button variant="secondary" size="sm" @click="emit('delete', event.id)">Delete</Button>
+        <Button
+          variant="secondary"
+          size="sm"
+          @click="emit('delete', { type: 'delete', val: event.id })"
+          >Delete</Button
+        >
       </div>
-      <Button v-else-if="isParticipating()" size="sm" @click="emit('leave', event.id)">
+      <Button
+        v-else-if="isParticipating()"
+        size="sm"
+        @click="emit('leave', { type: 'leave', val: event.id })"
+      >
         Leave
       </Button>
       <Button
         v-else
         size="sm"
         :disabled="event.maxParticipants === event.participantsCount"
-        @click="emit('join', event.id)"
+        @click="emit('join', { type: 'join', val: event.id })"
         >Join</Button
       >
     </CardFooter>

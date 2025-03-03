@@ -43,7 +43,12 @@ export const useEventStore = defineStore('event', () => {
   const destroy = (id: number) => {
     return new Promise((resolve, reject) => {
       axios.delete(`events/${id}`).then(
-        () => resolve(true),
+        () => {
+          fetch().then(
+            () => resolve(true),
+            () => reject()
+          )
+        },
         () => reject()
       )
     })
