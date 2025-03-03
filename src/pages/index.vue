@@ -1,10 +1,4 @@
-<script setup lang="ts">
-definePage({
-  meta: {
-    requiresAuth: false
-  }
-})
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div>

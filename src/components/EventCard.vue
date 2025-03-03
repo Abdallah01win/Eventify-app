@@ -60,8 +60,9 @@ const isParticipating = () => {
       </div>
 
       <div v-if="event.userId === authStore.user?.id" class="flex items-center gap-x-2">
-        <Button size="sm" @click="emit('update', event)">Update</Button>
+        <Button v-can="'events.update'" size="sm" @click="emit('update', event)">Update</Button>
         <Button
+          v-can="'events.delete'"
           variant="secondary"
           size="sm"
           @click="emit('delete', { type: 'delete', val: event.id })"
