@@ -7,7 +7,7 @@ import ProfileDropDown from './components/ProfileDropDown.vue'
 <template>
   <div class="flex items-center justify-between px-6 py-2">
     <div>Logo</div>
-    <div class="flex items-center space-x-6 text-sm">
+    <div class="flex items-center space-x-2.5 text-sm md:space-x-4 lg:space-x-6">
       <RouterLink to="/" class="text-muted-foreground hover:text-primary">Home</RouterLink>
       <RouterLink
         v-can="'events.read'"

@@ -11,6 +11,9 @@
   :root {
     --font-geist-sans: 'GeistSans';
 
+    --nav-height: 57px;
+    --view-height: calc(100vh - var(--nav-height));
+
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
