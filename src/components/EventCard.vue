@@ -29,7 +29,7 @@ const isParticipating = () => {
     <CardHeader>
       <CardTitle>{{ event.title }}</CardTitle>
       <CardDescription>
-        <div class="flex space-x-2">
+        <div class="flex flex-col max-md:space-y-1 md:flex-row md:space-x-2">
           <div class="flex items-center">
             <MapPin class="mr-1 h-4 w-4" />
             <div>{{ event.location }}</div>
@@ -43,7 +43,7 @@ const isParticipating = () => {
     </CardHeader>
     <CardContent class="text-sm"> {{ event.description }} </CardContent>
     <CardFooter class="flex justify-between">
-      <div class="flex gap-2">
+      <div class="flex gap-2 max-md:flex-wrap">
         <Badge variant="secondary">{{ event.category.name }}</Badge>
         <Badge variant="secondary">
           <span class="flex items-center">

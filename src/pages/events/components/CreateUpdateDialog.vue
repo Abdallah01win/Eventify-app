@@ -105,7 +105,7 @@ const onSubmit = () => {
 
 <template>
   <Dialog :open @update:open="emit('update:open', $event)">
-    <DialogContent class="max-w-[60%]">
+    <DialogContent class="max-w-[95%] md:max-w-[60%]">
       <DialogHeader>
         <DialogTitle>{{ event?.id ? 'Update Event' : 'Create a New Event' }}</DialogTitle>
         <VisuallyHidden asChild>
@@ -114,7 +114,7 @@ const onSubmit = () => {
         <DialogClose />
       </DialogHeader>
       <Form v-slot="{ meta }" :validationSchema @submit="onSubmit()">
-        <div class="grid grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-4">
           <FormField v-slot="{ componentField }" v-model="form.categoryId" name="categoryId">
             <FormItem>
               <FormLabel for="categoryId">Category</FormLabel>
@@ -190,7 +190,7 @@ const onSubmit = () => {
             </FormItem>
           </FormField>
 
-          <div class="col-span-3">
+          <div class="md:col-span-3">
             <FormField v-slot="{ componentField }" v-model="form.description" name="description">
               <FormItem>
                 <FormLabel for="description">Description</FormLabel>
@@ -203,7 +203,7 @@ const onSubmit = () => {
           </div>
         </div>
 
-        <DialogFooter class="mt-6">
+        <DialogFooter class="mt-6 gap-y-2 max-sm:flex-col">
           <Button :disabled="loading || !meta.valid" type="submit">
             <Loader2 v-if="loading" class="mr-1 h-4 w-4 animate-spin" />
             {{ isEdit ? 'Update' : 'Create' }}
