@@ -11,7 +11,7 @@ const authStore = useAuthStore()
 <template>
   <div class="flex items-center justify-between px-6 py-2">
     <RouterLink to="/" class="font-semibold tracking-tight text-primary">Eventify</RouterLink>
-    
+
     <div class="hidden items-center space-x-2.5 text-sm md:flex md:space-x-4 lg:space-x-6">
       <RouterLink to="/" class="text-muted-foreground hover:text-primary">Home</RouterLink>
       <div class="text-muted-foreground hover:text-primary">About</div>
