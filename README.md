@@ -10,7 +10,7 @@ A modern event management platform built with Vue 3, TypeScript, and Vite. This 
 
 ## Information
 
-### 🚀 Tech Stack
+### Tech Stack
 
 - Vue.js 3
 - TypeScript
@@ -20,7 +20,7 @@ A modern event management platform built with Vue 3, TypeScript, and Vite. This 
 - Vue Router
 - Pinia (State Management)
 
-### 📋 Prerequisites
+### Prerequisites
 
 Before you begin, ensure you have the following installed:
 
@@ -36,17 +36,29 @@ Follow these steps to set up the project locally:
 
    Open your terminal and run the following command to clone the repository:
 
-   `git clone https://github.com/Abdallah01win/Eventify-app.git`
+   ```bash
+   git clone https://github.com/Abdallah01win/Eventify-app.git
+   end
+
+   ```
 
 2. **Navigate into the project directory:**
 
-   `cd Eventify-app`
+   ```bash
+   cd Eventify-app
+   end
+
+   ```
 
 3. **Create a .env file:**
 
    1. Run the following command or copy the `.env.example` file contents manually into a `.env` file.
 
-   `cp .env.example .env`
+   ```bash
+   cp .env.example .env
+   end
+
+   ```
 
    2. Make sure the `VITE_API_ENDPOINT` variable is set to your local API's URL.
 
@@ -54,13 +66,21 @@ Follow these steps to set up the project locally:
 
    Make sure you have Node.js and npm installed. Then, run the following command to install the project dependencies:
 
-   `npm install`
+   ```bash
+   npm install
+   end
+
+   ```
 
 ## Usage
 
 1. Start the development server:
 
-`npm run dev`
+   ```bash
+   npm run dev
+   end
+
+   ```
 
 This will start the Vite development server and you can view the project in your browser at `http://localhost:5173`.
 
