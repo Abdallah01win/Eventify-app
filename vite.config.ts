@@ -23,5 +23,19 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src')
     }
+  },
+  optimizeDeps: {
+    include: [
+      '@vueuse/core',
+      '@vee-validate/zod',
+      '@internationalized/date',
+      'vee-validate',
+      'lucide-vue-next',
+      'radix-vue',
+      'class-variance-authority',
+      'tailwind-merge',
+      'clsx',
+      'reka-ui'
+    ]
   }
 })
