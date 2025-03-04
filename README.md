@@ -48,13 +48,14 @@ Follow these steps to set up the project locally:
 
 3. **Create a .env file:**
 
-   1. Run the following command or copy the `.env.example` file contents manually into a `.env` file.
+   1. Run the following command or manually copy the `.env.example` file contents into a `.env` file.
+
 
    ```bash
    cp .env.example .env
    ```
 
-   2. Make sure the `VITE_API_ENDPOINT` variable is set to your local API's URL.
+   2. Ensure the `VITE_API_ENDPOINT` variable is set to your local API's URL.
 
 4. **Install dependencies:**
 
@@ -74,9 +75,9 @@ Follow these steps to set up the project locally:
 
 This will start the Vite development server and you can view the project in your browser at `http://localhost:5173`.
 
-2.  Login credantials:
+2.  Login credentials:
 
-    The default user credantials are:
+    The default user credentials are:
 
         email: user@example.com
         password: 123456789
