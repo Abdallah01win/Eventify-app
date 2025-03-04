@@ -24,8 +24,8 @@ A modern event management platform built with Vue 3, TypeScript, and Vite. This 
 
 Before you begin, ensure you have the following installed:
 
-- Node.js (v22.0.0 is recommanded)
-- npm (v11.0.0 is recommanded)
+- Node.js (v22.0.0 is recommended)
+- npm (v11.0.0 is recommended)
 - Git
 
 ## Installation
