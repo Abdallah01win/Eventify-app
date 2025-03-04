@@ -50,12 +50,11 @@ Follow these steps to set up the project locally:
 
    1. Run the following command or manually copy the `.env.example` file contents into a `.env` file.
 
-
-   ```bash
-   cp .env.example .env
-   ```
-
-   2. Ensure the `VITE_API_ENDPOINT` variable is set to your local API's URL.
+         ```bash
+         cp .env.example .env
+         ```
+   
+   3. Ensure the `VITE_API_ENDPOINT` variable is set to your local API's URL.
 
 4. **Install dependencies:**
 
