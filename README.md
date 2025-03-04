@@ -38,16 +38,12 @@ Follow these steps to set up the project locally:
 
    ```bash
    git clone https://github.com/Abdallah01win/Eventify-app.git
-   end
-
    ```
 
 2. **Navigate into the project directory:**
 
    ```bash
    cd Eventify-app
-   end
-
    ```
 
 3. **Create a .env file:**
@@ -56,8 +52,6 @@ Follow these steps to set up the project locally:
 
    ```bash
    cp .env.example .env
-   end
-
    ```
 
    2. Make sure the `VITE_API_ENDPOINT` variable is set to your local API's URL.
@@ -68,8 +62,6 @@ Follow these steps to set up the project locally:
 
    ```bash
    npm install
-   end
-
    ```
 
 ## Usage
@@ -78,8 +70,6 @@ Follow these steps to set up the project locally:
 
    ```bash
    npm run dev
-   end
-
    ```
 
 This will start the Vite development server and you can view the project in your browser at `http://localhost:5173`.
