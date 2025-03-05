@@ -80,3 +80,5 @@ This will start the Vite development server and you can view the project in your
 
         email: user@example.com
         password: 123456789
+    
+   Note: To receive email notifications, please create a new account with a temporary email address and inbox.
